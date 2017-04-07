@@ -44,7 +44,7 @@ app.get('/', authMiddleware, (req, res) => {
   }
 });
 
-app.get('/rbac', authorizer.wants('viewFrontPage'),
+app.get('/rbac', [authMiddleware, authorizer.wants('viewFrontPage')],
     (req, res)=> {
         res.send(responseFormatter(HttpStatus.OK, 'You can do that Amigo'));
     });
